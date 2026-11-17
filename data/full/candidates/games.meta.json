@@ -1,0 +1,65 @@
+{
+  "dataset": "games",
+  "split": "test",
+  "n": 20,
+  "bpr_recall_at_n": 0.096,
+  "bpr_tuning": {
+    "trials": [
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.0005,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.1037,
+        "best_epoch": 134,
+        "minutes": 14.84840727398793
+      },
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.001,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.1036,
+        "best_epoch": 77,
+        "minutes": 9.097467929435274
+      },
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.002,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.0977,
+        "best_epoch": 33,
+        "minutes": 5.8654386627177395
+      }
+    ],
+    "best": {
+      "params": {
+        "embedding_size": 64,
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0
+      },
+      "best_valid": 0.1037,
+      "best_epoch": 134,
+      "minutes": 14.84840727398793
+    }
+  },
+  "bpr_final_epochs": 135,
+  "shuffle_seed": 2027,
+  "mode": "full",
+  "bpr_valid_metric": "Recall@20",
+  "bpr_seed": 2027,
+  "bpr_reproducibility": true,
+  "bpr_device": "cuda",
+  "torch": "2.5.1+cu124",
+  "recbole": "1.2.1",
+  "python": "3.11.18",
+  "platform": "Linux-5.15.0-105-generic-x86_64-with-glibc2.31",
+  "gpu": "NVIDIA TITAN RTX",
+  "cuda": "12.4",
+  "sha256": "178de14f24eeebe13c8b2e4b1ddfc4226583e71c91d66fdddf6059e8a43d0d45",
+  "n_users": 500
+}

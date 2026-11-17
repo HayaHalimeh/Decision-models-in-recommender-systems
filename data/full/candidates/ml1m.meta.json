@@ -1,0 +1,65 @@
+{
+  "dataset": "ml1m",
+  "split": "test",
+  "n": 20,
+  "bpr_recall_at_n": 0.148,
+  "bpr_tuning": {
+    "trials": [
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.0005,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.1325,
+        "best_epoch": 60,
+        "minutes": 38.77868376181771
+      },
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.001,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.1464,
+        "best_epoch": 58,
+        "minutes": 37.481687160705526
+      },
+      {
+        "params": {
+          "embedding_size": 64,
+          "learning_rate": 0.002,
+          "weight_decay": 0.0
+        },
+        "best_valid": 0.1465,
+        "best_epoch": 52,
+        "minutes": 34.56579164173454
+      }
+    ],
+    "best": {
+      "params": {
+        "embedding_size": 64,
+        "learning_rate": 0.002,
+        "weight_decay": 0.0
+      },
+      "best_valid": 0.1465,
+      "best_epoch": 52,
+      "minutes": 34.56579164173454
+    }
+  },
+  "bpr_final_epochs": 53,
+  "shuffle_seed": 2027,
+  "mode": "full",
+  "bpr_valid_metric": "Recall@20",
+  "bpr_seed": 2027,
+  "bpr_reproducibility": true,
+  "bpr_device": "cuda",
+  "torch": "2.5.1+cu124",
+  "recbole": "1.2.1",
+  "python": "3.11.18",
+  "platform": "Linux-5.15.0-105-generic-x86_64-with-glibc2.31",
+  "gpu": "NVIDIA TITAN RTX",
+  "cuda": "12.4",
+  "sha256": "27dc8a4361d3eb479732bf7fcf15e48d8db47774999bf1e79e925d0feb6903f8",
+  "n_users": 500
+}

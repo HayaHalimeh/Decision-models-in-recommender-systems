@@ -1,0 +1,33 @@
+# PLM rankers: EmbSim (bi-encoder cosine), CrossEnc (cross-encoder relevance), ItemCLS (NLI entailment).
+embsim:
+  group: plm
+  display: EmbSim
+  deployment: local
+  open: true
+  hf_model_id: Qwen/Qwen3-Embedding-0.6B
+  revision: 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3
+  dtype: float32
+  repeats: 3
+  instruction: "Given a user's interaction history, retrieve the {item} the user will interact with next"
+crossenc:
+  group: plm
+  display: CrossEnc
+  deployment: local
+  open: true
+  hf_model_id: Qwen/Qwen3-Reranker-0.6B
+  revision: e61197ed45024b0ed8a2d74b80b4d909f1255473
+  dtype: float32
+  repeats: 3
+  max_length: 8192
+  instruction: "Given a user's interaction history, retrieve the {item} the user will interact with next"
+itemcls:
+  group: plm
+  display: ItemCLS
+  deployment: local
+  open: true
+  hf_model_id: MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
+  revision: b3546ea6b0346eb6f8d5d68b13c7dc6d0376b3d7
+  dtype: float32
+  repeats: 3
+  max_length: 512                    # oldest history items are dropped if a pair is longer
+  hypothesis_template: "The user will {verb} {item} next."   # verb per dataset (itemcls_verb)

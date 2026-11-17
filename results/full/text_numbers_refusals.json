@@ -1,0 +1,154 @@
+[
+  {
+    "scope": "ml1m",
+    "model": "openai_decisions",
+    "condition": "other_user",
+    "n": 500,
+    "n_refused": 3,
+    "refusal_share": 0.006
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "other_user",
+    "n": 500,
+    "n_refused": 41,
+    "refusal_share": 0.082
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "other_user",
+    "n": 1500,
+    "n_refused": 44,
+    "refusal_share": 0.029333333333333333
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "random_fake",
+    "n": 500,
+    "n_refused": 5,
+    "refusal_share": 0.01
+  },
+  {
+    "scope": "yelp",
+    "model": "openai_decisions",
+    "condition": "random_fake",
+    "n": 500,
+    "n_refused": 1,
+    "refusal_share": 0.002
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "random_fake",
+    "n": 1500,
+    "n_refused": 6,
+    "refusal_share": 0.004
+  },
+  {
+    "scope": "ml1m",
+    "model": "openai_decisions",
+    "condition": "no_history",
+    "n": 500,
+    "n_refused": 223,
+    "refusal_share": 0.446
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "no_history",
+    "n": 500,
+    "n_refused": 185,
+    "refusal_share": 0.37
+  },
+  {
+    "scope": "yelp",
+    "model": "openai_decisions",
+    "condition": "no_history",
+    "n": 500,
+    "n_refused": 136,
+    "refusal_share": 0.272
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "no_history",
+    "n": 1500,
+    "n_refused": 544,
+    "refusal_share": 0.3626666666666667
+  },
+  {
+    "scope": "ml1m",
+    "model": "openai_decisions",
+    "condition": "length_05",
+    "n": 500,
+    "n_refused": 6,
+    "refusal_share": 0.012
+  },
+  {
+    "scope": "yelp",
+    "model": "openai_decisions",
+    "condition": "length_05",
+    "n": 500,
+    "n_refused": 1,
+    "refusal_share": 0.002
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "length_05",
+    "n": 1500,
+    "n_refused": 7,
+    "refusal_share": 0.004666666666666667
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "length_10",
+    "n": 500,
+    "n_refused": 1,
+    "refusal_share": 0.002
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "length_10",
+    "n": 1500,
+    "n_refused": 1,
+    "refusal_share": 0.0006666666666666666
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "rotation_04",
+    "n": 500,
+    "n_refused": 1,
+    "refusal_share": 0.002
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "rotation_04",
+    "n": 1500,
+    "n_refused": 1,
+    "refusal_share": 0.0006666666666666666
+  },
+  {
+    "scope": "games",
+    "model": "openai_decisions",
+    "condition": "label_swap",
+    "n": 500,
+    "n_refused": 1,
+    "refusal_share": 0.002
+  },
+  {
+    "scope": "pooled",
+    "model": "openai_decisions",
+    "condition": "label_swap",
+    "n": 1500,
+    "n_refused": 1,
+    "refusal_share": 0.0006666666666666666
+  }
+]

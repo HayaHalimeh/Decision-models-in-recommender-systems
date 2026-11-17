@@ -1,0 +1,22 @@
+# Reference rankers.
+bpr:
+  group: reference
+  repeats: 3
+  display: BPR
+  deployment: local
+  open: true
+popularity:
+  group: reference
+  repeats: 3
+  display: Popularity
+  deployment: local
+  open: true
+  count_on: train_without_test       # all interactions except every user's test target
+  seed: 2027
+random:
+  group: reference
+  repeats: 3
+  display: Random
+  deployment: local
+  open: true
+  seed: 2027

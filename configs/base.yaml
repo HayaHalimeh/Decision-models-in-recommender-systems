@@ -1,0 +1,182 @@
+# Base configuration of the experiments; configs/server.yaml is merged on top.
+mode: full
+seed: 2027
+log_level: INFO
+
+paths:
+  raw: data/raw # Yelp is downloaded by hand (configs/datasets/yelp.yaml)
+  processed: data/{mode}/processed
+  splits: data/{mode}/splits
+  candidates: data/{mode}/candidates # frozen candidate sets
+  training: training/{mode}
+  runs: runs/{mode}
+  logs: logs/{mode}
+  results: results/{mode}
+
+run_datasets: [ml1m, games, yelp]
+
+data:
+  min_core: 5
+  dedup: first # repeated (user, item) pairs: keep the first
+  tie_break: file_order # equal timestamps: raw file order
+  drop_untitled_items: true
+  n_test_users: 500
+  n_val_users: 100
+  sample_seed: 2027
+  download: true # download ML-1M / Amazon if missing
+
+history:
+  transforms: # the history every model sees (RQ2 adds its own transforms)
+    - { name: last_k, k: 10 }
+  full_history_k: 50
+
+candidates:
+  n: 20
+  shuffle_seed: 2027
+  transforms: []
+
+longhist: # RQ2 history-length sample
+  enabled: true
+  n_users: 500
+  lengths: [5, 10, 20, 30, 40, 50]
+
+prompt:
+  system: null
+  max_title_chars: 200
+
+retriever:
+  model: BPR
+  device: auto
+  max_epochs: 300
+  patience: 10
+  train_batch_size: 4096
+  eval_batch_size: 409600
+  valid_metric: Recall@20
+  grid:
+    embedding_size: [64]
+    learning_rate: [0.0005, 0.001, 0.002]
+    weight_decay: [0.0]
+  final_train_includes_valid: true # final BPR: all interactions except the test target
+
+sequential:
+  models: [sasrec, bert4rec, gru4rec]
+  device: auto
+  max_seq_length: 50
+  max_epochs: 200
+  patience: 10
+  train_batch_size: 2048
+  eval_batch_size: 4096
+  valid_metric: NDCG@10
+  test_history: last_k
+  fractions: [1, 10, 25, 50, 75, 100] # % of training users
+  seeds: [0, 1, 2]
+  min_train_users: 10
+  tune_at_fraction: 100 # grid search at 100 %, seed 0; its parameters are reused for the curve
+
+runs:
+  repeats_api: 3
+  repeats_sampling: 3
+  repeats_local: 1
+  determinism_users: 20
+  refusal_retries: 3 # a refused decision-API call is re-sent up to 3 times; still refused -> NDCG@5 = 0
+  device: auto
+
+eval:
+  k: 5
+  bootstrap_resamples: 1000
+  bootstrap_seed: 2027
+  alpha: 0.05
+
+rq:
+  models:
+    [
+      jev,
+      openai_decisions,
+      ms_decision1,
+      clef_flash,
+      pplx_decider_flash,
+      kev4b,
+      gpt6_luna,
+      qwen35_4b,
+      qwen35_9b,
+      gpt6_luna_off,
+      qwen35_4b_base,
+      qwen38_27b,
+    ]
+  seed: 2027
+  label_swap_seed: 2027
+  n_rotations: 20
+  reference_run: 0 # "Real" = RQ1 run 0
+  rerun_source: new # new | rq1_run1
+  rerun_seed_run: 3 # seeded LLMs: the rerun's request seed = request_seed + 3
+  colors:
+    real: "#212529"
+    other_user: "#1c3d8c"
+    random_fake: "#3b6fd4"
+    no_history: "#8fb3f0"
+    shuffled: "#0b7a75"
+    reversed: "#5cc2b9"
+    same_item: "#1f3b73"
+    same_label: "#0f766e"
+    other: "#d1d5db"
+
+report:
+  # NDCG cutoffs of the robustness check (results/{mode}/k{k}/; make report ARGS="--set eval.k=10 ...", see Makefile)
+  robustness_k: [10, 20]
+  # post-hoc analyses (report/posthoc.py, make posthoc)
+  posthoc:
+    large_llms: [qwen38_27b, gpt6_luna, gpt6_luna_off]
+    latency:
+      models: [jev, openai_decisions, ms_decision1, clef_flash, pplx_decider_flash, kev4b,
+               gpt6_luna, gpt6_luna_off, qwen38_27b, qwen35_9b, qwen35_4b, qwen35_4b_base]
+      hardware:
+        jev: Jev hosted API
+        openai_decisions: OpenAI API
+        ms_decision1: OpenRouter, provider pinned to Azure
+        clef_flash: local GPU server (NVIDIA GB10), bf16, System One server
+        pplx_decider_flash: local GPU server (NVIDIA GB10), bf16, System One server
+        kev4b: local GPU server (NVIDIA GB10), bf16, Kev repository server
+        gpt6_luna: OpenAI API
+        gpt6_luna_off: OpenAI API
+        qwen38_27b: hosted OpenAI-compatible endpoint (LiteLLM proxy, 10 requests/min)
+        qwen35_9b: local GPU server (NVIDIA GB10), bf16, vLLM 0.33.0
+        qwen35_4b: local GPU server (NVIDIA GB10), bf16, vLLM 0.33.0
+        qwen35_4b_base: local GPU server (NVIDIA GB10), bf16, vLLM 0.33.0
+      pairs:  # [decision model, LLM, what they share]
+        - [clef_flash, qwen35_9b, backbone; same GPU server; bf16]
+        - [pplx_decider_flash, qwen35_4b, backbone; same GPU server; bf16]
+        - [kev4b, qwen35_4b_base, backbone; same GPU server; bf16]
+        - [openai_decisions, gpt6_luna, same OpenAI API]
+        - [openai_decisions, gpt6_luna_off, same OpenAI API]
+  # Figures 3 and 4 draw these models, picked from Table 1's pooled NDCG@5: the n_decision best decision models,
+  # the best LLM reranker, then `extra` (all models are in the CSVs and text numbers)
+  figure_models: {n_decision: 6, best_llm: true, extra: [gpt6_luna]}
+  # Table 1, the only RQ1 table (results/{mode}/table1.tex, full width): shorter names, and models shown
+  # as indented sub-rows under a shared name. Models not listed use their `display` name.
+  # table1_width: column (one column, short names and headers) or page (table*, full width)
+  table1_width: column
+  table1_domain_abbrev: {ml1m: ML, games: Gam., yelp: Yelp}
+  per_domain_short_display: {pplx_decider_flash: Perplexity Dec., openai_decisions: OpenAI Dec.}
+  per_domain_subrows:
+    gpt6_luna: [GPT-6 Luna, thinking on]
+    gpt6_luna_off: [GPT-6 Luna, thinking off]
+  table1_rows:
+    [
+      jev,
+      openai_decisions,
+      ms_decision1,
+      clef_flash,
+      pplx_decider_flash,
+      kev4b,
+      gpt6_luna,
+      gpt6_luna_off,
+      qwen38_27b,
+      qwen35_9b,
+      qwen35_4b,
+      qwen35_4b_base,
+      embsim,
+      crossenc,
+      itemcls,
+      popularity,
+      random,
+    ]

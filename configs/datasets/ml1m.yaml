@@ -1,0 +1,7 @@
+display: ML-1M
+loader: ml1m
+itemcls_verb: watch # ItemCLS hypothesis "the user will watch ..."
+item_noun_singular: movie # PLM instruction "retrieve the movie ..."
+item_noun: movies
+url: https://files.grouplens.org/datasets/movielens/ml-1m.zip
+strip_year: false # keep the year in titles, e.g. "Toy Story (1995)"

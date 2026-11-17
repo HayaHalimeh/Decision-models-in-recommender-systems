@@ -1,0 +1,44 @@
+{
+  "raw": {
+    "users": 279936,
+    "items": 14577,
+    "interactions": 967906,
+    "density": 0.00023719540720627754,
+    "mean_seq_len": 3.4575974508459075,
+    "median_seq_len": 1.0
+  },
+  "dropped_untitled": {
+    "items": 0,
+    "interactions": 0
+  },
+  "final": {
+    "users": 35879,
+    "items": 10949,
+    "interactions": 562413,
+    "density": 0.00143166222087359,
+    "mean_seq_len": 15.675269656344938,
+    "median_seq_len": 8.0
+  },
+  "kcore_iterations": 8,
+  "title_disambiguation": {
+    "items_with_shared_title": 1941,
+    "titles_changed": 1941,
+    "items_still_shared": 24
+  },
+  "info": {
+    "source": "real",
+    "city_key": "philadelphia",
+    "city_spellings": {
+      "Philadelphia": 14570,
+      "PHILADELPHIA": 4,
+      "philadelphia": 3
+    },
+    "top_cities_by_reviews": {
+      "philadelphia": 967906,
+      "new orleans": 635556,
+      "tampa": 455519,
+      "nashville": 451792,
+      "tucson": 405302
+    }
+  }
+}

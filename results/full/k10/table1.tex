@@ -1,0 +1,43 @@
+% Table 1 (RQ1) -- requires \usepackage{booktabs}; written by make rq1-report (Report.table1)
+\begin{table}[t]
+\centering
+\caption{NDCG@10 for 500 test users per domain, averaged over three runs. Realistic Retrieval scores and BPR's Recall@20 are $\times 100$. $\eta$ is the pooled NDCG@10 over users whose target BPR retrieved. All is pooled over domains. Best ranker in bold, second underlined.}
+\label{tab:rq1}
+\footnotesize
+\setlength{\tabcolsep}{1.4pt}
+\begin{tabular}{@{}lcccc@{\hspace{5pt}}cccc@{\hspace{5pt}}c@{}}
+\toprule
+ & \multicolumn{4}{c}{Injection Oracle} & \multicolumn{4}{c}{Realistic ($\times$100)} & \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Model & ML & Gam. & Yelp & All & ML & Gam. & Yelp & All & $\eta$ \\
+\midrule
+\multicolumn{10}{@{}l}{\textit{Decision models}} \\
+Jev & \underline{.344} & \underline{.317} & .231 & \textbf{.297} & \textbf{6.22} & \textbf{4.57} & 3.18 & \textbf{4.66} & \textbf{.416} \\
+OpenAI Dec. & .275 & .229 & .178 & .227 & 5.22 & 3.94 & \textbf{3.77} & 4.31 & .385 \\
+MS-Decision-1 & \textbf{.353} & .282 & \underline{.244} & \underline{.293} & 5.49 & 4.03 & 2.58 & 4.03 & .360 \\
+Clef-flash & .297 & \textbf{.327} & .214 & .280 & 5.79 & 4.07 & 2.80 & 4.22 & .377 \\
+Perplexity Dec. & .306 & .300 & .234 & .280 & 4.64 & 3.77 & 3.35 & 3.92 & .350 \\
+Kev-4B & .295 & .251 & .202 & .249 & 5.44 & 3.11 & 3.26 & 3.94 & .352 \\
+\midrule
+\multicolumn{10}{@{}l}{\textit{LLM rankers}} \\
+GPT-6 Luna & & & & & & & & & \\
+\quad thinking on & .297 & .242 & .165 & .235 & \underline{5.96} & \underline{4.48} & 3.20 & \underline{4.55} & \underline{.406} \\
+\quad thinking off & .305 & .229 & .177 & .237 & 5.92 & 3.94 & \underline{3.37} & 4.41 & .394 \\
+Qwen3.8-27B & .302 & .220 & .213 & .245 & 4.88 & 3.53 & 2.84 & 3.75 & .335 \\
+Qwen3.5-9B & .298 & .216 & .206 & .240 & 4.75 & 3.26 & 2.34 & 3.45 & .308 \\
+Qwen3.5-4B & .277 & .197 & .216 & .230 & 4.92 & 2.66 & 2.32 & 3.30 & .295 \\
+Qwen3.5-4B-Base & .253 & .224 & .220 & .232 & 4.30 & 2.26 & 2.18 & 2.91 & .260 \\
+\midrule
+\multicolumn{10}{@{}l}{\textit{PLM rankers}} \\
+EmbSim & .240 & .218 & \textbf{.251} & .236 & 5.38 & 3.80 & 1.44 & 3.54 & .316 \\
+CrossEnc & .290 & .215 & .231 & .245 & 3.87 & 3.17 & 2.22 & 3.08 & .275 \\
+ItemCLS & .217 & .310 & .208 & .245 & 3.62 & 2.59 & 2.89 & 3.03 & .271 \\
+\midrule
+\multicolumn{10}{@{}l}{\textit{References}} \\
+Popularity & .139 & .105 & .118 & .121 & 4.62 & 2.82 & 3.17 & 3.54 & .316 \\
+Random & .226 & .233 & .232 & .230 & 3.32 & 2.17 & 2.21 & 2.57 & .229 \\
+\midrule
+\textit{BPR Recall@20} & & & & & 14.8 & 9.6 & 9.2 & 11.2 &  \\
+\bottomrule
+\end{tabular}
+\end{table}

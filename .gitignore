@@ -1,0 +1,54 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+data/raw/
+data/smoke/
+# training/ (BPR + sequential tuning records, RecBole input files, BPR weights) stays local:
+# the BPR tuning is in data/full/candidates/*.meta.json, the chosen sequential settings in the README table
+training/
+logs/
+runs/smoke/
+results/smoke/
+.pytest_cache/
+# processed datasets (= user histories) stay local; only the per-dataset counts are published
+data/full/processed/*/*
+!data/full/processed/*/stats.json
+log_tensorboard/
+.DS_Store
+*.egg-info/
+# local/: machine-specific scripts, the old full Makefile (smoke, checks) and per-machine progress logs; never pushed
+local/
+# progress logs (results/{mode}/progress.jsonl) hold local paths
+results/*/progress*.jsonl
+# notebooks: local working notebooks, not part of the experiments
+notebooks/
+# Yelp terms (no redistribution): the Yelp candidate files store each user's full history (LOCKED_SETTINGS 9)
+data/full/candidates/yelp*
+# validation-user candidates: only used for trial runs, not for any reported result
+data/full/candidates/*.val.*
+# scripts that are only used locally (checks, one-off migration, server setup and serving, run helpers)
+scripts/check_candidates.py
+scripts/check_complete.py
+scripts/retie_results.py
+scripts/make_longhist.py
+scripts/run_pipeline.sh
+scripts/serve_qwen35_4b.sh
+scripts/serve_qwen35_9b.sh
+scripts/setup_vllm_env.sh
+scripts/run_detached.sh
+scripts/__pycache__/
+# Amazon cross-check of our Games preprocessing (local only; benchmark files in local/configs/crosscheck.yaml)
+scripts/crosscheck_amazon.py
+src/dm4recsys/data/crosscheck.py
+results/*/amazon_crosscheck.json
+# validation-user trial runs (not results)
+runs/**/val/
+# not published: result rows (Yelp RQ2/RQ3 rows store user histories) and the working docs
+runs/
+OPEN_QUESTIONS.md
+LOCKED_SETTINGS.md
+# report outputs: only results/full/ is published (smoke outputs and leftovers stay local)
+results/*
+!results/full/
+results/full/rq_csv/rq3_label_swap_skipped.json

@@ -1,0 +1,9 @@
+display: Games
+loader: amazon
+itemcls_verb: buy # ItemCLS hypothesis "the user will buy ..."
+item_noun_singular: product # PLM instruction "retrieve the product ..."
+item_noun: products # history block "the following products"
+category: Video_Games
+hf_base: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023/resolve/main
+ratings_file: benchmark/0core/rating_only/Video_Games.csv # user_id,parent_asin,rating,timestamp
+meta_file: raw/meta_categories/meta_Video_Games.jsonl

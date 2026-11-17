@@ -1,0 +1,111 @@
+# LLM rankers, all through one OpenAI-compatible client.
+gpt6_luna:
+  group: llm
+  display: GPT-6 Luna
+  deployment: api
+  open: false
+  model_id: gpt-6-luna
+  base_url: https://api.openai.com/v1
+  api_key_env: OPENAI_API_KEY
+  temperature: null                    # with reasoning only the default temperature is accepted
+  max_tokens: 4000
+  max_tokens_param: max_completion_tokens
+  extra_body: {reasoning_effort: medium}
+  timeout_s: 300
+  concurrency: 8
+# Open LLMs = the base models of the open decision models, served by vLLM 0.33.0 in bf16 (scripts/local_serve.sh);
+# thinking off, the model card's instruct-mode settings, request seed 2027 + run.
+qwen35_9b:
+  group: llm
+  display: Qwen3.5-9B
+  deployment: local
+  open: true
+  model_id: Qwen/Qwen3.5-9B
+  revision: c202236235762e1c871ad0ccb60c8ee5ba337b9a
+  pairs_with: [clef_flash]
+  base_url: http://localhost:8001/v1
+  temperature: 0.7
+  max_tokens: 4000
+  extra_body: {top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5, repetition_penalty: 1.0,
+               chat_template_kwargs: {enable_thinking: false}}
+  seed_requests: true
+  request_seed: 2027
+  memory: ~19 GB bf16 (9.7B params)
+  timeout_s: 3600
+  concurrency: 8
+qwen35_4b:
+  group: llm
+  display: Qwen3.5-4B
+  deployment: local
+  open: true
+  model_id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  pairs_with: [pplx_decider_flash]
+  base_url: http://localhost:8002/v1
+  temperature: 0.7
+  max_tokens: 4000
+  extra_body: {top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5, repetition_penalty: 1.0,
+               chat_template_kwargs: {enable_thinking: false}}
+  seed_requests: true
+  request_seed: 2027
+  memory: ~9.3 GB bf16 (4.7B params)
+  timeout_s: 3600
+  concurrency: 8
+qwen35_4b_base:
+  group: llm
+  display: Qwen3.5-4B-Base
+  deployment: local
+  open: true
+  model_id: Qwen/Qwen3.5-4B-Base
+  revision: 1001bb4d826a52d1f399e183466143f4da7b741b
+  pairs_with: [kev4b]
+  api: completions                     # base model: no chat template
+  base_url: http://localhost:8003/v1
+  temperature: 0.7
+  extra_body: {top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5, repetition_penalty: 1.0}
+  seed_requests: true
+  request_seed: 2027
+  max_tokens: 300
+  stop: ["\n\n"]                       # stop at the first blank line
+  memory: ~9.3 GB bf16 (4.7B params)
+  timeout_s: 120
+  concurrency: 8
+# Larger open LLM behind an OpenAI-compatible endpoint (too large to run locally on most machines);
+# a scale row, not the base of a decision model.
+qwen38_27b:
+  group: llm
+  display: Qwen3.8-27B
+  deployment: hosted
+  open: true
+  model_id: qwen3.8-27b                # the model's ID at your endpoint
+  base_url: http://localhost:8004/v1   # your OpenAI-compatible endpoint
+  api_key_env: Qwen27_API_KEY
+  temperature: 0.7
+  max_tokens: 4000
+  # request shape for a LiteLLM proxy (as run); a plain vLLM server takes the flat extra_body of the Qwen3.5 rows
+  extra_body: {top_p: 0.8, presence_penalty: 1.5, cache: {no-cache: true},
+               extra_body: {top_k: 20, min_p: 0.0, repetition_penalty: 1.0,
+                            chat_template_kwargs: {enable_thinking: false}}}
+  seed_requests: true
+  request_seed: 2027
+  timeout_s: 600
+  max_retries: 8
+  min_interval_s: 6.3                  # pacing for a 10 requests/min limit
+  concurrency: 2
+gpt6_luna_off:
+  group: llm
+  display: GPT-6 Luna (thinking off)
+  deployment: api
+  open: false
+  model_id: gpt-6-luna
+  base_url: https://api.openai.com/v1
+  api_key_env: OPENAI_API_KEY
+  temperature: 0.7
+  max_tokens: 4000
+  max_tokens_param: max_completion_tokens
+  extra_body: {reasoning_effort: none}
+  seed_requests: true
+  request_seed: 2027
+  timeout_s: 300
+  max_retries: 8
+  concurrency: 4

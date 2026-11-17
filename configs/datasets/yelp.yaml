@@ -1,0 +1,12 @@
+display: Yelp
+loader: yelp
+itemcls_verb: visit              # ItemCLS hypothesis "the user will visit ..."
+item_noun_singular: business     # PLM instruction "retrieve the business ..."
+item_noun: businesses
+# Manual download (licence): put the Yelp Open Dataset JSON files in data/raw/yelp/
+review_file: yelp_academic_dataset_review.json
+business_file: yelp_academic_dataset_business.json
+city: philadelphia               # the city with the most reviews in the review file (used in the experiments)
+city_normalise: true             # strip + case-fold city names before matching
+disambiguate_titles: address     # names shared by several businesses (chains) get their street address,
+                                 # e.g. "Starbucks (1500 Market St)"; unique names stay unchanged

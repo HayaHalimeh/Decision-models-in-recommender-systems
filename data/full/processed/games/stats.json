@@ -1,0 +1,26 @@
+{
+  "raw": {
+    "users": 2766656,
+    "items": 137249,
+    "interactions": 4555500,
+    "density": 1.1996973480987134e-05,
+    "mean_seq_len": 1.646572613292003,
+    "median_seq_len": 1.0
+  },
+  "dropped_untitled": {
+    "items": 9,
+    "interactions": 436
+  },
+  "final": {
+    "users": 94745,
+    "items": 25610,
+    "interactions": 814461,
+    "density": 0.0003356637287093952,
+    "mean_seq_len": 8.596348092247611,
+    "median_seq_len": 6.0
+  },
+  "kcore_iterations": 13,
+  "info": {
+    "source": "real"
+  }
+}

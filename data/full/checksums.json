@@ -1,0 +1,73 @@
+{
+ "created": "2026-11-14T21:01:01+00:00",
+ "mode": "full",
+ "note": "sha256 and size per file; regenerate with scripts/make_checksums.py, verify with --check",
+ "raw": {
+  "data/raw/ml-1m.zip": {
+   "sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+   "bytes": 5917549
+  },
+  "data/raw/ml-1m/ratings.dat": {
+   "sha256": "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f",
+   "bytes": 24594131
+  },
+  "data/raw/ml-1m/movies.dat": {
+   "sha256": "0140fc2356357c1a851d0f52e893a1e4d3696df632c4141cea8d5bc3d621f0b9",
+   "bytes": 171308
+  },
+  "data/raw/amazon/Video_Games/Video_Games.csv": {
+   "sha256": "1216270fdd163d085bd3efe2d98f4850f408e5a201edd37d74f9d86b74418746",
+   "bytes": 264209546
+  },
+  "data/raw/amazon/Video_Games/meta_Video_Games.jsonl": {
+   "sha256": "3ad94dfaa8dfed23c5f420aa9ddec415d00f2b8ec9f2d796f487b4b2c4d256de",
+   "bytes": 437375785
+  },
+  "data/raw/yelp/yelp_academic_dataset_review.json": {
+   "sha256": "a4edc050d14eec25373a75e7ee211d42f49f14f47230837d8c7849eb9c5f2f96",
+   "bytes": 5341868833
+  },
+  "data/raw/yelp/yelp_academic_dataset_business.json": {
+   "sha256": "392280627d83ecdcbff8006bba5db289f8436ef147d5a103b1ace5b54186727f",
+   "bytes": 118863795
+  }
+ },
+ "processed": {
+  "data/full/processed/games/interactions.tsv": {
+   "sha256": "e1a6a9a20da98c568f53a24740bf7ba89a3f1deac78c1bdbb38647d0daed5d85",
+   "bytes": 47388734
+  },
+  "data/full/processed/games/items.tsv": {
+   "sha256": "428a174e9be33a84ec341eab330818389605333159ab809a6f5da42b874c3330",
+   "bytes": 2266534
+  },
+  "data/full/processed/games/stats.json": {
+   "sha256": "60d9f5b528f4e566dbf202c8f459a71163266a0fb78400f73254d3feb4cd9081",
+   "bytes": 516
+  },
+  "data/full/processed/ml1m/interactions.tsv": {
+   "sha256": "09d827abbfd8d4724dad5b98f5e90c4d183e829957f743fc0377a943f050336e",
+   "bytes": 25081154
+  },
+  "data/full/processed/ml1m/items.tsv": {
+   "sha256": "d760720f902de0ac0966f2a9cf98119b4c33d9631a6438e0f0eb27e6113f7f18",
+   "bytes": 101743
+  },
+  "data/full/processed/ml1m/stats.json": {
+   "sha256": "dc7c2d305b7e6b5dd7174922ca60885b4ebc8283426e4896e0243168ea70ff4f",
+   "bytes": 506
+  },
+  "data/full/processed/yelp/interactions.tsv": {
+   "sha256": "3f09f464a93ff49a80c9b61e3495f27997ac91fbef8c139fadc4db325fec40ed",
+   "bytes": 34630089
+  },
+  "data/full/processed/yelp/items.tsv": {
+   "sha256": "18bde24cb0a0118d72bf8166c4602a3cc2786f86916654f02aaaeb85293b52c9",
+   "bytes": 495983
+  },
+  "data/full/processed/yelp/stats.json": {
+   "sha256": "7990eb0e9ebe932c85881b62e89bbc602dfd0eae54ce2b1785da01e73529c9ea",
+   "bytes": 948
+  }
+ }
+}

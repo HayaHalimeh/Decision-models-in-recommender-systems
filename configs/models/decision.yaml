@@ -1,0 +1,91 @@
+# Decision models. empty_state = the `state` sent under RQ2 "no history".
+jev:
+  group: decision
+  display: Jev
+  deployment: api
+  open: false
+  endpoint: https://jevtypesafeai.com/api/v1/decide
+  api_model: jev-1.14.0                  # pinned version
+  api_key_env: JEV_API_KEY
+  empty_state: []
+  model_version: jev-1.14.0
+  timeout_s: 60
+openai_decisions:
+  group: decision
+  display: OpenAI Decisions
+  deployment: api
+  open: false
+  empty_state: "\n"                     # a single newline
+  endpoint: https://api.openai.com/v1/decisions
+  api_model: gpt-6-luna
+  api_key_env: OPENAI_API_KEY
+  model_version: gpt-6-luna-decisions
+  timeout_s: 60
+ms_decision1:
+  group: decision
+  display: MS-Decision-1
+  deployment: api
+  open: false
+  empty_state: []
+  provider: openrouter
+  openrouter_model: microsoft/microsoft-decision-1-20261009   # pinned version
+  openrouter_api_key_env: OPENROUTER_API_KEY
+  openrouter_provider: {order: [Azure], allow_fallbacks: false}
+  model_version: microsoft/microsoft-decision-1-20261009
+  timeout_s: 60
+# Open decision models: native heads behind a local System One server (`POST /v1/systemone`), bf16
+# (scripts/local_serve.sh).
+clef_flash:
+  group: decision
+  display: Clef-flash
+  deployment: local
+  open: true
+  empty_state: []
+  provider: Cloudflare
+  hf_model_id: Cloudflare/clef-flash
+  revision: 22b75507981345858dd152fbd9a6f8c0c4068b0a
+  base_model: Qwen/Qwen3.5-9B
+  training: frozen backbone + joint schema head + adapters
+  pair_llm: qwen35_9b
+  endpoint: http://localhost:30000/v1/systemone
+  api_model: Cloudflare/clef-flash
+  memory: ~19 GB in bf16 (9.4B params)
+  model_version: Cloudflare/clef-flash@22b7550
+  timeout_s: 120
+  repeats: 3
+pplx_decider_flash:
+  group: decision
+  display: Perplexity Decider flash v1.2
+  deployment: local
+  open: true
+  empty_state: []
+  provider: Perplexity
+  hf_model_id: perplexity-ai/pplx-decider-flash-v1.2
+  revision: 9ff7cf9838e59df461c276b7699d56b244d2af58
+  base_model: Qwen/Qwen3.5-4B
+  training: full fine-tune (readout head, noncausal full attention)
+  pair_llm: qwen35_4b
+  endpoint: http://localhost:8010/v1/systemone
+  api_model: pplx-decider-flash-v1.2
+  memory: ~9 GiB in bf16 (4.5B params)
+  model_version: perplexity-ai/pplx-decider-flash-v1.2@9ff7cf9
+  timeout_s: 120
+  repeats: 3
+kev4b:
+  group: decision
+  display: Kev-4B
+  deployment: local
+  open: true
+  empty_state: []
+  provider: Jared Palmer
+  hf_model_id: jaredpalmer/kev-4b
+  revision: 6cfce5c2fa4b4bd64026336ab649c5ca78857d52
+  base_model: Qwen/Qwen3.5-4B-Base
+  training: LoRA + pointer head
+  pair_llm: qwen35_4b_base
+  endpoint: http://localhost:8008/v1/systemone   # Kev repository server (python -m kev.serve)
+  api_model: kev-latest
+  memory: 14.3 GB resident in bf16 (model card)
+  model_version: jaredpalmer/kev-4b@6cfce5c
+  timeout_s: 120
+  repeats: 3

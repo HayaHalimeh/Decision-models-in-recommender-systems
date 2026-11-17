@@ -1,0 +1,5 @@
+# Run configuration of the experiments (BPR, sequential models and PLMs on a CUDA GPU).
+mode: full
+retriever: {device: cuda}
+sequential: {device: cuda}
+runs: {device: cuda}
